@@ -1,0 +1,85 @@
+﻿@using System.Collections;
+@model IEnumerable<HelloWorld.ViewModels.LancamentoViewModel>
+
+@{ Layout = null; }
+
+<div class="row">
+    <div class="col s1 offset-s10">
+        <span class="flow-text">
+            <a class="btn-floating btn-large waves-effect waves-light green" title="Novo" onclick="buscarDados()"><i class="material-icons">add</i></a>
+        </span>
+    </div>
+</div>
+
+<table class="responsive-table bordered centered">
+    <thead>
+        <tr>
+         
+            <th>DataCadastro</th>
+            <th>Valor</th>
+            <th>Descricao</th>
+            <th>DataEvento</th>
+            <th>Categoria</th>
+            <th>Conta</th>
+            <th>Usuario</th>
+            <th>Acao</th>
+       
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                 
+                    <td>@item.DataCadastro</td>
+                    <td>@item.Valor</td>
+                    <td>@item.Descricao</td>
+                    <td>@item.DataEvento</td>
+                    <td>@item.Categoria.Nome</td>
+                    <td>@item.Conta.Nome</td>
+                    <td>@item.Usuario.Email</td>
+                    <td>@item.Acao.Nome</td>
+
+                    <td>
+                        <span class="flow-text">
+                            <a class="btn-floating waves-effect waves-light green" title="Editar" onclick="buscarDados('@item.IdLancamento')"><i class="material-icons">mode_edit</i></a>
+                            <a class="btn-floating waves-effect waves-light red" title="Excluir" onclick="excluirConta(@item.IdLancamento)"><i class="material-icons">delete</i></a>
+                        </span>
+                    </td>
+                </tr>
+
+            }
+        }
+        else
+        {
+            <tr><td colspan="2">Nenhum registro encontrado....</td></tr>
+        }
+    </tbody>
+</table>
+
+<script>
+
+      function buscarDados(IdLancamento) {
+         $.get('@Url.Action("BuscarDados", "Lancamento")'
+             , {
+                 IdLancamento: IdLancamento
+             }).done(function (data) {
+                 $("#divGridLancamento").html(data);
+             }).fail(function (xhr) {
+                 alert(xhr.responseText);
+             });
+    }
+
+      function excluirConta(IdLancamento) {
+         if (!confirm("Tem certeza que deseja excluir esse lancamento??")) return;
+         $.get('@Url.Action("Delete","Lancamento")', {
+             IdLancamento: IdLancamento
+         }).done(function () {
+             buscarGrid();
+         }).fail(function (xhr) {
+             alert(xhr.responseText);
+         });
+     }
+
+</script>

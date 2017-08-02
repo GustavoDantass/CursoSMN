@@ -1,0 +1,21 @@
+﻿<div class="container" id="divContentConta">
+    <h4>
+        Conta
+    </h4>
+
+    <div id="divGridConta">
+     
+    </div>
+</div>
+
+<script>
+
+    function buscarGrid() {
+        $.get('@Url.Action("BuscarGrid", "Conta")').done(function (data) {
+            $("#divGridConta").html(data);
+        });
+    }
+
+    buscarGrid();
+
+</script>

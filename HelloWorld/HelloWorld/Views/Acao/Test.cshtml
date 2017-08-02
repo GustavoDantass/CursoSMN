@@ -1,0 +1,22 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model  HelloWorld.ViewModels.AcaoViewModel
+
+@*action // Controler*@
+@using (Html.BeginForm("Test", "Acao", FormMethod.Post, new { @id = "formIdTest" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.DropDownListFor(prop => prop.ListaAcao, new SelectList(this.Model.ListaAcao, "IdAcao", "Nome"), "Selecione aqui", new { @id = "myFirstDropDownList" })
+
+
+}
+
+<script type="text/javascript">
+    function callSubmit() {
+        document.getElementById("formIdTest").submit();
+    };
+</script>

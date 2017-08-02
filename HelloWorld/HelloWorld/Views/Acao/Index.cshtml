@@ -1,0 +1,21 @@
+﻿<div class="container" id="divContentAcao">
+    <h4>
+        Ação
+    </h4>
+    
+    <div id="divGridAcao">
+       
+    </div>
+</div>
+
+<script>
+
+    function buscarGrid() {
+        $.get('@Url.Action("BuscarGrid", "Acao")').done(function (data) {
+            $("#divGridAcao").html(data);
+        });
+    }
+
+    buscarGrid();
+
+</script>

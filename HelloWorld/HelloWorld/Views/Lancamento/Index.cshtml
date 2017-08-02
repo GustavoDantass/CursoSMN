@@ -1,0 +1,21 @@
+﻿<div class="container" id="divContentLancamento">
+    <h4>
+        Lançamentos
+    </h4>
+  
+    <div id="divGridLancamento">
+     
+    </div>
+</div>
+
+<script>
+
+    function buscarGrid() {
+        $.get('@Url.Action("BuscarGrid", "Lancamento")').done(function (data) {
+            $("#divGridLancamento").html(data);
+        });
+    }
+
+    buscarGrid();
+
+</script>

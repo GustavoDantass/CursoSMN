@@ -1,0 +1,5 @@
+C:\Users\gusta\Desktop\Curso c#\intensivo-c-sharp\Web API\CursoCSharpAPI\CursoRepositorio\bin\Debug\CursoRepositorio.dll
+C:\Users\gusta\Desktop\Curso c#\intensivo-c-sharp\Web API\CursoCSharpAPI\CursoRepositorio\bin\Debug\CursoRepositorio.pdb
+C:\Users\gusta\Desktop\Curso c#\intensivo-c-sharp\Web API\CursoCSharpAPI\CursoRepositorio\obj\Debug\CursoRepositorio.csprojResolveAssemblyReference.cache
+C:\Users\gusta\Desktop\Curso c#\intensivo-c-sharp\Web API\CursoCSharpAPI\CursoRepositorio\obj\Debug\CursoRepositorio.dll
+C:\Users\gusta\Desktop\Curso c#\intensivo-c-sharp\Web API\CursoCSharpAPI\CursoRepositorio\obj\Debug\CursoRepositorio.pdb

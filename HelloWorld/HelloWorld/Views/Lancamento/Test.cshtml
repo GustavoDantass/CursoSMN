@@ -1,0 +1,51 @@
+﻿
+@model  HelloWorld.ViewModels.LancamentoViewModel
+
+@*action // Controler*@
+
+
+@using (Html.BeginForm("Test", "Lancamento", FormMethod.Post, new { @id = "formIdTest" }))
+{
+    
+
+    @Html.DropDownListFor(prop => prop.ListaAcao, new SelectList(this.Model.ListaAcao, "IdAcao", "Nome"), "Selecione aqui", new { @id = "myFirstDropDownList" })
+
+
+}
+
+
+    <div class="row">
+    <input type="hidden" name="IdLancamento" value="@Model.IdLancamento" />
+    <div class="input-field col s12">
+        <input id="txtDescricao" type="text" class="validate" name="Descricao" value="@Model.Descricao">
+        <label for="txtDescricao">Descrição</label>
+    </div>
+    <div class="input-field col s12">
+        <input id="txtDataEvento" type="text" class="validate" name="DataEvento" value="@Model.DataEvento">
+        <label for="txtDataEvento">DataEvento</label>
+    </div>
+
+
+    <div class="input-field col s12">
+        <input id="txtIdAcao" type="text" class="validate" name="IdAcao" value="@Model.IdAcao">
+        <label for="txtIdAcao">IdAcao</label>
+    </div>
+    <div class="input-field col s12">
+        <input id="txtIdCategoria" type="text" class="validate" name="IdCategoria" value="@Model.IdCategoria">
+        <label for="txtIdCategoria">IdCategoria</label>
+    </div>
+
+    <div class="input-field col s12">
+        <input id="txtIdConta" type="text" class="validate" name="IdConta" value="@Model.IdConta">
+        <label for="txtIdConta">IdConta</label>
+    </div>
+    <div class="input-field col s12">
+        <input id="txtValor" type="text" class="validate" name="Valor" value="@Model.Valor">
+        <label for="txtValor">Valor</label>
+    </div>
+</div>
+            <script type="text/javascript">
+                function callSubmit() {
+                    document.getElementById("formIdTest").submit();
+                };
+            </script>
