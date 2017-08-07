@@ -1,4 +1,5 @@
-﻿@using System.Collections;
+﻿
+@using System.Collections;
 @model IEnumerable<HelloWorld.ViewModels.LancamentoViewModel>
 
 @{ Layout = null; }
@@ -14,7 +15,7 @@
 <table class="responsive-table bordered centered">
     <thead>
         <tr>
-         
+
             <th>DataCadastro</th>
             <th>Valor</th>
             <th>Descricao</th>
@@ -23,7 +24,7 @@
             <th>Conta</th>
             <th>Usuario</th>
             <th>Acao</th>
-       
+
     </thead>
     <tbody>
         @if (Model != null && Model.Any())
@@ -31,7 +32,7 @@
             foreach (var item in Model)
             {
                 <tr>
-                 
+
                     <td>@item.DataCadastro</td>
                     <td>@item.Valor</td>
                     <td>@item.Descricao</td>

@@ -14,5 +14,12 @@ namespace HelloWorld.ViewModels
 
         //Vinculo
         public UsuarioViewModel Usuario { get; set; }
+
+        public List<UsuarioViewModel> ListaUsuario { get; set; }
+
+        public ContaViewModel()
+        {
+            ListaUsuario = new List<UsuarioViewModel>();
+        }
     }
 }

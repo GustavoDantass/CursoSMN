@@ -8,68 +8,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace HelloWorld.Controllers
 {
     public class AcaoController : Controller
     {
-        //=============================================================================================================
-
-
-        //private BancoDeDados _connect;
-
-        //public AcaoController()
-        //{
-        //    _connect = new BancoDeDados();
-        //}
-      
-        public void LoadAcao(AcaoViewModel testmodel)
-        {
-            //_connect.ExecutarProcedure("GKSSP_SelAcoes");
-
-            //var acoes = new List<AcaoViewModel>();
-            //using (var leitor = _connect.ExecuteReader())
-            //{
-            //    while (leitor.Read())
-            //    {
-            //        acoes.Add(new AcaoViewModel
-            //        {
-            //            IdAcao = leitor.GetInt32(leitor.GetOrdinal("IdAcao")),
-            //            Nome = leitor.GetString(leitor.GetOrdinal("Nome"))
-            //        });
-            //    }
-            //}
-
-            var resposta = Requisicao.Get("http://localhost:5000/api/Acao");
-
-            var acao = JsonConvert.DeserializeObject<IEnumerable<AcaoViewModel>>(resposta.Content.ReadAsStringAsync().Result);
-
-            testmodel.ListaAcao = acao.ToList();
-            
-
-        }
-
-
-        public ActionResult Test()
-        {
-            AcaoViewModel testmodel = new AcaoViewModel();
-
-            LoadAcao(testmodel);
-
-            return View(testmodel);
-        }
-
-        //[HttpPost]
-        //public ActionResult Test(AcaoViewModel teste)
-        //{
-        //    LoadAcao(teste);
-
-
-        //    return View(teste);
-        //}
-
-
-        //=============================================================================================================
-
         public ActionResult Index()
         {
             return View();  

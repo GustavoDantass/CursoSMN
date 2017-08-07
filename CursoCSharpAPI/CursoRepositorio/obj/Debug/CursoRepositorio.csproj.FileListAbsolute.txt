@@ -3,3 +3,8 @@ C:\Users\gusta\Desktop\Curso c#\intensivo-c-sharp\Web API\CursoCSharpAPI\CursoRe
 C:\Users\gusta\Desktop\Curso c#\intensivo-c-sharp\Web API\CursoCSharpAPI\CursoRepositorio\obj\Debug\CursoRepositorio.csprojResolveAssemblyReference.cache
 C:\Users\gusta\Desktop\Curso c#\intensivo-c-sharp\Web API\CursoCSharpAPI\CursoRepositorio\obj\Debug\CursoRepositorio.dll
 C:\Users\gusta\Desktop\Curso c#\intensivo-c-sharp\Web API\CursoCSharpAPI\CursoRepositorio\obj\Debug\CursoRepositorio.pdb
+C:\Users\gusta\Desktop\CursoSMN\CursoCSharpAPI\CursoRepositorio\bin\Debug\CursoRepositorio.dll
+C:\Users\gusta\Desktop\CursoSMN\CursoCSharpAPI\CursoRepositorio\bin\Debug\CursoRepositorio.pdb
+C:\Users\gusta\Desktop\CursoSMN\CursoCSharpAPI\CursoRepositorio\obj\Debug\CursoRepositorio.csprojResolveAssemblyReference.cache
+C:\Users\gusta\Desktop\CursoSMN\CursoCSharpAPI\CursoRepositorio\obj\Debug\CursoRepositorio.dll
+C:\Users\gusta\Desktop\CursoSMN\CursoCSharpAPI\CursoRepositorio\obj\Debug\CursoRepositorio.pdb

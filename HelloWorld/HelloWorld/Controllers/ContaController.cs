@@ -6,16 +6,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace HelloWorld.Controllers
 {
     public class ContaController : Controller
     {
+        public void LoadUsuario(ContaViewModel Conta)
+        {
+            var resposta = Requisicao.Get("http://localhost:5000/api/Usuario");
+            var Usuario = JsonConvert.DeserializeObject<IEnumerable<UsuarioViewModel>>(resposta.Content.ReadAsStringAsync().Result);
+
+            Conta.ListaUsuario = Usuario.ToList();
+
+        }
+
         public ActionResult Index()
         {
             return View();
         }
-
+       
+        
         public ActionResult BuscarGrid()
         {
             try
@@ -36,6 +47,7 @@ namespace HelloWorld.Controllers
                 return View("Error:", ex.Message);
             }
         }
+
         public ActionResult BuscarDados(int? IdConta)
         {
             try
@@ -51,7 +63,7 @@ namespace HelloWorld.Controllers
 
                     conta = JsonConvert.DeserializeObject<ContaViewModel>(resposta.Content.ReadAsStringAsync().Result);
                 }
-
+                LoadUsuario(conta);
                 return View("_Dados", conta);
             }
             catch (Exception ex)
@@ -61,7 +73,7 @@ namespace HelloWorld.Controllers
 
         }
 
-        public ActionResult Post(ContaViewModel conta)
+        public ActionResult Post(ContaViewModel conta,DropDownList dll)
         {
             try
             {

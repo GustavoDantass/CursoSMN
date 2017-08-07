@@ -32,10 +32,17 @@ namespace HelloWorld.ViewModels
         public UsuarioViewModel Usuario { get; set; }
 
         public List<AcaoViewModel> ListaAcao { get; set; }
+        public List<CategoriaViewModel> ListaCategoria{ get; set; }
+        public List<ContaViewModel> ListaConta { get; set; }
+        public List<UsuarioViewModel> ListaUsuario { get; set; }
+
 
         public LancamentoViewModel()
         {
             ListaAcao = new List<AcaoViewModel>();
+            ListaCategoria = new List<CategoriaViewModel>();
+            ListaConta = new List<ContaViewModel>();
+            ListaUsuario = new List<UsuarioViewModel>();
         }
 
         //================================================================================================================

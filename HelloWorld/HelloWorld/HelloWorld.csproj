@@ -165,7 +165,6 @@
     <Compile Include="infra\Requisicao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AcaoViewModel.cs" />
-    <Compile Include="ViewModels\BancoDeDados.cs" />
     <Compile Include="ViewModels\CategoriaViewModel.cs" />
     <Compile Include="ViewModels\ContaViewModel.cs" />
     <Compile Include="ViewModels\LancamentoViewModel.cs" />
@@ -236,12 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Lancamento\_Dados.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Lancamento\Test.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Acao\Test.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

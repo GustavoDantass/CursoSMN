@@ -11,5 +11,13 @@ namespace HelloWorld.ViewModels
         public string Email { get; set; }
         public string Senha { get; set; }
         public byte FG_Ativo { get; set; }
+            
+
+        public List<UsuarioViewModel> ListaUsuario { get; set; }
+
+        public UsuarioViewModel()
+        {
+            ListaUsuario = new List<UsuarioViewModel>();
+        }
     }
 }

@@ -1,8 +1,18 @@
-﻿
+﻿@model HelloWorld.ViewModels.LancamentoViewModel
+@{ Layout = null; }
 
-@model HelloWorld.ViewModels.LancamentoViewModel
+  <!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--Import materialize.css-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
 
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.ajax.unobtrusive/3.2.4/jquery.unobtrusive-ajax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
 
 <div class="row">
     <div class="col s1 offset-s10">
@@ -12,112 +22,111 @@
     </div>
 </div>
 
-
-@using (Ajax.BeginForm(Model.IdLancamento == 0 ? "Post" : "Put",
-                                                                     "Lancamento", new AjaxOptions
-                                                                     {
-                                                                         HttpMethod = "Post",
-                                                                         OnSuccess = "buscarGrid()",
-                                                                         OnFailure = "DeuErrado(xhr)"
-                                                                     }, new { @class = "col s12" }))
-{
-
 <div class="row">
-    <input type="hidden" name="IdLancamento" value="@Model.IdLancamento" />
-    <div class="input-field col s12">
-        <input id="txtDescricao" type="text" class="validate" name="Descricao" value="@Model.Descricao">
-        <label for="txtDescricao">Descrição</label>
-    </div>
-    <div class="input-field col s12">
-        <input id="txtDataEvento" type="text" class="validate" name="DataEvento" value="@Model.DataEvento">
-        <label for="txtDataEvento">DataEvento</label>
-    </div>
+    @using (Ajax.BeginForm(Model.IdLancamento == 0 ? "Post" : "Put",
+                                                                             "Lancamento", new AjaxOptions
+                                                                             {
+                                                                                 HttpMethod = "Post",
+                                                                                 OnSuccess = "buscarGrid()",
+                                                                                 OnFailure = "DeuErrado(xhr)"
+                                                                             }, new { @class = "col s12" }))
+    {
 
-    <div class="input-field col s12">
-  
-        @using (Html.BeginForm("Test", "Lancamento", FormMethod.Post, new { @id = "formIdTest" } ))
+        <div class="row">
+            <input type="hidden" name="IdLancamento" value="@Model.IdLancamento" />
+            <div class="input-field col s12">
+                <input id="txtDescricao" type="text" class="validate" name="Descricao" value="@Model.Descricao">
+                <label for="txtDescricao">Descrição</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="DataEvento" type="text" class="validate" name="DataEvento" value="@Model.DataEvento">
+                <label for="DataEvento">DataEvento</label>
+            </div>
+
+
+            @*<div class="input-field col s12">
+                <input id="IdAcao" type="text" class="validate" name="IdAcao" value="@Model.IdAcao">
+                <label for="IdAcao">IdAcao</label>
+            </div>*@
+
+            <div class="input-field col s12" >
+ 
+                @using (Html.BeginForm("LoadAcao", "Lancamento", FormMethod.Post, new { @id = "Model.IdAcaoform" }))
+                {
+                    @Html.AntiForgeryToken()
+                            
+                    @Html.DropDownListFor(prop => prop.ListaAcao, new SelectList(this.Model.ListaAcao, "IdAcao", "Nome"), "Selecione a Ação", new { @id = "IdAcao", @name ="IdAcao" , @value="@Model.IdAcao" })
+
+                   
+                }
+            </div>
+                 
+
+            @*<div class="input-field col s12" id="Categoria">
+
+                    @using (Html.BeginForm("LoadCategoria", "Lancamento", FormMethod.Post, new { @id = "formIdCategoria" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.DropDownListFor(Categoria => Categoria.ListaCategoria, new SelectList(this.Model.ListaCategoria, "IdCategoria", "Nome"), "Selecione aqui", new { @id = "myCategoriaDropDownList" })
+                    }
+                </div>*@
+@*
+    <div class="input-field col s12" id="Conta" >
+
+        @using (Html.BeginForm("LoadConta", "Lancamento", FormMethod.Post, new { @id = "Conta" }))
         {
+            @Html.AntiForgeryToken()
 
-
-            @Html.DropDownListFor(prop => prop.ListaAcao, new SelectList(this.Model.ListaAcao, "IdAcao", "Nome"), "Selecione aqui", new { @id = "myFirstDropDownList" })
-
-
+            @Html.DropDownListFor(Conta => Conta.ListaConta, new SelectList(this.Model.ListaConta, "IdConta", "Nome"),"Seleciona Conta", new { id = "MyContaDropDownList" })
         }
     </div>
 
-    <div class="input-field col s12">
-        <input id="txtIdCategoria" type="text" class="validate" name="IdCategoria" value="@Model.IdCategoria">
-        <label for="txtIdCategoria">IdCategoria</label>
-    </div>
+    <div class="input-field col s12" id="Usuario">
+        @using (Html.BeginForm("LoadUsuario", "Lancamento", FormMethod.Post, new { @id = "Usuario" }))
+        {
+            @Html.AntiForgeryToken()
 
-    <div class="input-field col s12">
-        <input id="txtIdConta" type="text" class="validate" name="IdConta" value="@Model.IdConta">
-        <label for="txtIdConta">IdConta</label>
-    </div>
-    <div class="input-field col s12">
-        <input id="txtValor" type="text" class="validate" name="Valor" value="@Model.Valor">
-        <label for="txtValor">Valor</label>
-    </div>
+            @Html.DropDownListFor(Conta => Conta.ListaUsuario, new  SelectList(this.Model.ListaUsuario, "IdUsuario", "Email"), "Seleciona Usuario", new { id = "MyUsuarioDropDownList" })
+        }
+    </div>*@
 
-</div>
-
-
-
-@*<form class="col s12">
-
-    <div class="row">
-   
-            <div class="row">
-                <input type="hidden" name="IdLancamento" value="@Model.IdLancamento" />
-                <div class="input-field col s12">
-                    <input id="txtDescricao" type="text" class="validate" name="Descricao" value="@Model.Descricao">
-                    <label for="txtDescricao">Descrição</label>
-                </div>
-                <div class="input-field col s12">
-                    <input id="txtDataEvento" type="text" class="validate" name="DataEvento" value="@Model.DataEvento">
-                    <label for="txtDataEvento">DataEvento</label>
-                </div>
-
-
-                <div class="input-field col s12">
-                    <input id="txtIdAcao" type="text" class="validate" name="IdAcao" value="@Model.IdAcao">
-                    <label for="txtIdAcao">IdAcao</label>
-                </div>
-                <div class="input-field col s12">
-                    <input id="txtIdCategoria" type="text" class="validate" name="IdCategoria" value="@Model.IdCategoria">
-                    <label for="txtIdCategoria">IdCategoria</label>
-                </div>
-
-                <div class="input-field col s12">
-                    <input id="txtIdConta" type="text" class="validate" name="IdConta" value="@Model.IdConta">
-                    <label for="txtIdConta">IdConta</label>
-                </div>
-                <div class="input-field col s12">
-                    <input id="txtValor" type="text" class="validate" name="Valor" value="@Model.Valor">
-                    <label for="txtValor">Valor</label>
-                </div>
-            </div>*@
-
-            
-
-
-
-            <div class="row">
-                <div class="col s1 offset-s10">
-                    <div class="fixed-action-btn">
-                        <button type="submit"
-                                class="btn-floating btn-large waves-effect waves-light green validate"
-                                title="Salvar"
-                                id="btnSalvarLancamento">
-                            <i class="large material-icons">save</i>
-                        </button>
-                    </div>
-                </div>
+            <div class="input-field col s12">
+                <input id="IdCategoria" type="text" class="validate" name="IdCategoria" value="@Model.IdCategoria">
+                <label for="IdCategoria">IdCategoria</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="IdUsuario" type="text" class="validate" name="IdUsuario" value="@Model.IdUsuario">
+                <label for="IdUsuario">IdUsuario</label>
             </div>
 
-}
+            <div class="input-field col s12">
+                <input id="txtIdConta" type="text" class="validate" name="IdConta" value="@Model.IdConta">
+                <label for="txtIdConta">IdConta</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="txtValor" type="text" class="validate" name="Valor" value="@Model.Valor">
+                <label for="txtValor">Valor</label>
+            </div>
+
+        </div>
 
 
+        <div class="row">
+            <div class="col s1 offset-s10">
+                <div class="fixed-action-btn">
+                    <button type="submit"
+                            class="btn-floating btn-large waves-effect waves-light green validate"
+                            title="Salvar"
+                            id="btnSalvarLancamento">
+                        <i class="large material-icons">save</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
 
 
 <script>
@@ -132,7 +141,7 @@
 
 
     $("#btnSalvarLancamento").click(function () {
-        if ($("#DataEvento").val().trim() == "") {
+        if ($("#txtDescricao").val().trim() == "") {
             alert("Obrigatorio informar Nome do lancamento para prosseguir ");
             return false;
         };
@@ -142,7 +151,9 @@
         alert(xhr.responseText);
     }
 
-
+    $(document).ready(function () {
+        $('select').material_select();
+    });
 
 
 </script>

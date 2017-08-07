@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Web.UI.WebControls;
 
 namespace HelloWorld.Controllers
 {
@@ -18,53 +18,42 @@ namespace HelloWorld.Controllers
 
         //=============================================================================================================
 
-        private BancoDeDados _connect;
 
-        public LancamentoController()
+        public void LoadAcao(LancamentoViewModel lancamento)
         {
-            _connect = new BancoDeDados();
-        }
-
-        public void LoadAcao(LancamentoViewModel testmodel)
-        {
-            _connect.ExecutarProcedure("GKSSP_SelAcoes");
-
-            var acoes = new List<AcaoViewModel>();
-            using (var leitor = _connect.ExecuteReader())
-            {
-                while (leitor.Read())
-                {
-                    acoes.Add(new AcaoViewModel
-                    {
-                        IdAcao = leitor.GetInt32(leitor.GetOrdinal("IdAcao")),
-                        Nome = leitor.GetString(leitor.GetOrdinal("Nome"))
-                    });
-                }
-            }
-
-            testmodel.ListaAcao = acoes;
+            var resposta = Requisicao.Get("http://localhost:5000/api/Acao");
+            var Acao = JsonConvert.DeserializeObject<IEnumerable<AcaoViewModel>>(resposta.Content.ReadAsStringAsync().Result);
+            
+            lancamento.ListaAcao = Acao.ToList();
 
 
         }
 
-
-        public ActionResult Test()
+        public void LoadCategoria(LancamentoViewModel testmodel)
         {
-            LancamentoViewModel testmodel = new LancamentoViewModel();
+            var resposta = Requisicao.Get("http://localhost:5000/api/Categoria");
+            var Categoria = JsonConvert.DeserializeObject<IEnumerable<CategoriaViewModel>>(resposta.Content.ReadAsStringAsync().Result);
 
-            LoadAcao(testmodel);
-
-            return View(testmodel);
+            testmodel.ListaCategoria= Categoria.ToList();
         }
 
-        [HttpPost]
-        public ActionResult Test(LancamentoViewModel teste)
+        public void LoadConta(LancamentoViewModel testmodel)
         {
-            LoadAcao(teste);
+            var resposta = Requisicao.Get("http://localhost:5000/api/Conta");
+            var Conta = JsonConvert.DeserializeObject<IEnumerable<ContaViewModel>>(resposta.Content.ReadAsStringAsync().Result);
 
-
-            return View(teste);
+            testmodel.ListaConta = Conta.ToList();
         }
+
+        public void LoadUsuario(LancamentoViewModel testmodel)
+        {
+            var resposta = Requisicao.Get("http://localhost:5000/api/Usuario");
+            var Usuario = JsonConvert.DeserializeObject<IEnumerable<UsuarioViewModel>>(resposta.Content.ReadAsStringAsync().Result);
+
+            testmodel.ListaUsuario = Usuario.ToList();
+        }
+
+
         //================================================================================================
 
         public ActionResult Index()
@@ -82,8 +71,7 @@ namespace HelloWorld.Controllers
                     return View("Error", "Erro ao buscar api");
 
                 var Lancamento = JsonConvert.DeserializeObject<IEnumerable<LancamentoViewModel>>(resposta.Content.ReadAsStringAsync().Result);
-
-                var prop = new LancamentoViewModel();
+                
 
                
 
@@ -98,7 +86,7 @@ namespace HelloWorld.Controllers
                 return View("Error:", ex.Message);
             }
         }
-        public ActionResult BuscarDados(int? IdLancamento)
+        public ActionResult BuscarDados(int? IdLancamento, DropDownList dll)
         {
             try
             {
@@ -116,9 +104,11 @@ namespace HelloWorld.Controllers
                     lancamento = JsonConvert.DeserializeObject<LancamentoViewModel>(resposta.Content.ReadAsStringAsync().Result);
                 }
 
-                
-
+              
+                LoadCategoria(lancamento);
                 LoadAcao(lancamento);
+                LoadConta(lancamento);
+                LoadUsuario(lancamento);
 
                 return View("_Dados", lancamento);
             }
